@@ -1,6 +1,7 @@
 #include <iostream>  //for c++
 #include <conio.h>   //_kbhit() and _getch();
 #include <windows.h> //for Sleep();
+#include <conio.h>
 using namespace std;
 
 //for border
@@ -24,6 +25,7 @@ enum position
     DOWN
 };
 position dir;
+HANDLE colurs = GetStdHandle(STD_OUTPUT_HANDLE);
 
 //body snake
 int tailx[100], taily[100];
@@ -58,9 +60,11 @@ void draw(string name)
             if (j == 0 or j == width - 1) //leftmost and rightmost wall
                 cout << "#";
             else if (i == y and j == x)
-                cout << "O";
+                     cout << "O";
+            
             else if (i == snakefoody and j == snakefoodx)
-                cout << "@";
+                    cout << "@";
+            
 
             else
             {
@@ -173,8 +177,7 @@ int logic()
     for (int i = 0; i < ntail; i++)
     {
         if (tailx[i] == x and taily[i] == y)
-               gameover = true;
-        
+            gameover = true;
     }
 
     if (x == snakefoodx and y == snakefoody)
@@ -190,21 +193,24 @@ int logic()
 int main()
 {
 
+    // system("color 70");
     string name;
     cout << "your name: ";
     cin >> name;
     set();
     while (gameover == 0)
     {
+    SetConsoleTextAttribute(colurs,242);
         draw(name);
         input();
         logic();
         Sleep(30);
     }
-    if(gameover==1){
-            system("cls");
-             cout<<"GAME OVER! "<<endl;
-            cout<<"score: "<<score<<endl;
-            Sleep(500);
+    if (gameover == 1)
+    {
+        system("cls");
+        cout << "GAME OVER! " << endl;
+        cout << "score: " << score << endl;
+        Sleep(500);
     }
 }
