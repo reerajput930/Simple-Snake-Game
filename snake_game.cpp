@@ -211,6 +211,6 @@ int main()
         system("cls");
         cout << "GAME OVER! " << endl;
         cout << "score: " << score << endl;
-        Sleep(500);
+        Sleep(5000);
     }
 }
